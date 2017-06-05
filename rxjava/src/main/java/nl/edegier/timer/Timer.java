@@ -1,4 +1,4 @@
-package nl.edegier;
+package nl.edegier.timer;
 
 import io.reactivex.Observable;
 
