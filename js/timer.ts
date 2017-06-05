@@ -1,4 +1,8 @@
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
+
+document.getElementById('timerBtn').addEventListener('click', startTimer);
+document.getElementById('resetBtn').addEventListener('click', resetTimer);
+let valueNode = document.getElementById('values');
 
 let numbers = [1, 5, 10];
 
@@ -14,12 +18,25 @@ let source$ = Observable.create(observer => {
     };
 
     produceValue();
-})
-    .map(n => n * 2)
-    .filter(n => n > 4);
+});
+    // .map(n => n * 2)
+    // .filter(n => n > 4);
 
-source$.subscribe(
-    value => { console.log(`value: ${value}`) },
-    error => { console.error(error) },
-    () => { console.log('done') }
-);
+
+function startTimer() {
+    source$.subscribe(
+        value => {
+            valueNode.innerHTML = valueNode.innerHTML + value + '<br/>';
+        },
+        error => {
+            console.error(error)
+        },
+        () => {
+            valueNode.innerHTML = valueNode.innerHTML + 'Done!';
+        }
+    );
+}
+
+function resetTimer() {
+    valueNode.innerHTML = '';
+}

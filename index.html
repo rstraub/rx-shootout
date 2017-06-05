@@ -23,9 +23,150 @@
 </head>
 <body>
 <div class="reveal">
+    <div id="hook"></div>
     <div class="slides">
+        <!-- Opening -->
+        <section data-background-image="stream.gif">
+            <h2>Observables with RxJS and RxJava</h2>
+        </section>
+
+        <!-- Agenda -->
         <section>
-            <h1>Hello</h1>
+            <h2>Agenda</h2>
+            <ul>
+                <li>What observables are</li>
+                <li>What problems they solve</li>
+                <li>How we use them</li>
+            </ul>
+        </section>
+
+        <!--What are observables?-->
+        <section>
+            <section>
+                <h2>What are observables?</h2>
+            </section>
+            <section>
+                <p> Collection of data delivered over time</p>
+                <pre class="fragment"><code class="javascript">var data = [1, 2, 3, 4, 5, ...];</code></pre>
+            </section>
+            <section>
+                <h3>Observable</h3>
+                <p>Passes data to observer</p>
+                <ul class="fragment">
+                    <li>next()</li>
+                    <li>error()</li>
+                    <li>complete()</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Observer</h3>
+                <p>Handles data of the observable</p>
+                <ul class="fragment">
+                    <li>subscribe(next, error, complete)</li>
+                    <li>unsubscribe()</li>
+                </ul>
+            </section>
+        </section>
+
+        <!--What problems do observables solve-->
+        <section>
+            <section>
+                <h2>What problems do they solve?</h2>
+            </section>
+            <section>
+                <h3>Variable</h3>
+                <pre class="fragment"><code class="javascript">var data = 42;</code></pre>
+            </section>
+            <section>
+                <h3>Promise</h3>
+                <pre class="fragment">
+                    <code class="javascript">
+var promise = $http.post('endpoint', params);
+promise.then(response => ...);
+promise.catch(error => ...);
+promise.finally(complete => ...);
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Array</h3>
+                <pre class="fragment"><code class="javascript">var data = [1, 2, 3, 4, 5]</code></pre>
+            </section>
+            <section>
+                <table>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Sync</th>
+                        <th>Async</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>Single value</th>
+                        <td>variable</td>
+                        <td>promise</td>
+                    </tr>
+                    <tr>
+                        <th>Multiple values</th>
+                        <td>array</td>
+                        <td class="fragment grow">observable</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </section>
+
+        <!--How do we use observables-->
+        <section>
+            <section data-background="rxjs.png" data-background-size="50%">
+                <h3>How do we use them?</h3>
+            </section>
+
+            <section>
+                <h3>Build them yourself!</h3>
+                <pre><code class="javascript">let source$ = Observable.create(...)</code></pre>
+            </section>
+
+            <section>
+                <button id="timerBtn">Start</button>
+                <button id="resetBtn">Reset</button>
+                <div id="values"></div>
+            </section>
+
+            <section>
+                <h3>Operators</h3>
+                <ul>
+                    <li>Create</li>
+                    <li>Transform</li>
+                    <li>Filter</li>
+                    <li>...</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>Use Rx creation operators</h3>
+                <pre><code class="javascript">let source$ = Observable.from(...)</code></pre>
+            </section>
+            <!-- RxJS -->
+            <section>
+                <button id="spyBtn">Do magic</button>
+                <button id="stopBtn">Stop</button>
+            </section>
+            <!-- RxJava -->
+            <!-- todo Hier een stuk over rxjava -->
+        </section>
+
+        <!-- Recap -->
+        <section>
+            <h2>Recap</h2>
+            <ul>
+                <li>Observable = collection of data delivered over time</li>
+                <li>Solves async multiple values problem</li>
+                <li>Use a library like RxJS</li>
+                <li>Build them yourself</li>
+                <li>Use operators</li>
+            </ul>
         </section>
     </div>
     <!--<div id="hook"></div>-->

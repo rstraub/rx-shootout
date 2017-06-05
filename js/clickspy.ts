@@ -1,9 +1,14 @@
-import { Observable } from 'rxjs';
+import { Observable } from "rxjs";
 
-let paragraph = document.getElementById('hook');
+let ball = document.getElementById('hook');
+let subscription;
+let canvas = document.getElementsByClassName('slide-background present');
 
-let source = Observable.fromEvent(document, 'mousemove')
-    .map((clickEvent: MouseEvent ) => {
+document.getElementById('spyBtn').addEventListener('click', startSpy);
+document.getElementById('stopBtn').addEventListener('click', stopSpy);
+
+let source$ = Observable.fromEvent(canvas, 'mousemove')
+    .map((clickEvent: MouseEvent) => {
         return {
             x: clickEvent.clientX,
             y: clickEvent.clientY
@@ -11,14 +16,27 @@ let source = Observable.fromEvent(document, 'mousemove')
     })
     .delay(200);
 
-source.subscribe(
-    value => { onNext(value) },
-    error => { console.error('oops') },
-    () => { console.log('done!') }
-);
+function startSpy() {
+    subscription = source$.subscribe(
+        value => {
+            onNext(value)
+        },
+        error => {
+            console.error('oops')
+        },
+        () => {
+            console.log('done!')
+        }
+    );
+}
+
+function stopSpy() {
+    ball.style.backgroundColor = 'transparent';
+    subscription.unsubscribe();
+}
 
 function onNext(value) {
-    paragraph.style.color = 'red';
-    paragraph.style.left = value.x + 'px';
-    paragraph.style.top = value.y + 'px';
+    ball.style.backgroundColor = 'red';
+    ball.style.left = value.x + 'px';
+    ball.style.top = value.y + 'px';
 }
