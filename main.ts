@@ -1,2 +1,2 @@
-import './timer';
-import './clickspy';
+import './js/timer';
+// import './js/clickspy';
