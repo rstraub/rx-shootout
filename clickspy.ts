@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 
 let paragraph = document.getElementById('hook');
-console.log(paragraph)
-let source = Observable.fromEvent(document, 'click')
+
+let source = Observable.fromEvent(document, 'mousemove')
     .map((clickEvent: MouseEvent ) => {
         return {
             x: clickEvent.clientX,
@@ -18,7 +18,7 @@ source.subscribe(
 );
 
 function onNext(value) {
-    paragraph.style.color = 'red'
+    paragraph.style.color = 'red';
     paragraph.style.left = value.x + 'px';
     paragraph.style.top = value.y + 'px';
 }
