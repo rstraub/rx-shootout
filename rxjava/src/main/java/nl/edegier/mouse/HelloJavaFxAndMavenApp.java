@@ -31,9 +31,9 @@ public class HelloJavaFxAndMavenApp extends Application {
             });
         });
 
-        mouseObservable.subscribe(event ->{
-            circle.setCenterX(event.getSceneX());
-            circle.setCenterY(event.getSceneY());
+        mouseObservable.map(event -> new double[]{event.getSceneX(),event.getSceneY()}).subscribe(point ->{
+            circle.setCenterX(point[0]);
+            circle.setCenterY(point[1]);
         });
 
         stage.setTitle("Follow me");
