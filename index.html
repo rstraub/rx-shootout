@@ -30,7 +30,7 @@
             <h2>Observables with RxJS and RxJava</h2>
         </section>
 
-        <!-- Agenda -->
+        <!-- Agenda
         <section>
             <h2>Agenda</h2>
             <ul>
@@ -38,6 +38,55 @@
                 <li>What problems they solve</li>
                 <li>How we use them</li>
             </ul>
+        </section>
+        -->
+        <section>
+            <h2>Every thing is reactive</h2>
+            <ul>
+                <li class="fragment">User clicks a button</li>
+                <li class="fragment">An external message is received</li>
+                <li class="fragment">Datastore query returns a result</li>
+                <li class="fragment"><h3>Don't call us, we call you</h3></li>
+            </ul>
+        </section>
+
+        <section>
+             <pre class="stretch"><code  style="font-size: 60%;overflow: hidden;" contenteditable>
+ mongo.findWithOptions(query, result -> {
+     for(Test test : result.result()){
+         this.environmentService.environmentIsLocked(test.getEnvironment(), envLockedResult -> { // async call to db
+         if (envLockedResult.result()) {
+            continue;
+         } else {
+             if (test.isRunIsolated()) {
+                 getRunningTestsForEnvironment(test.getEnvironment(), result -> {   // async call to db
+                    if (result.result().isEmpty()) {
+                        resultHandler.handle(Future.succeededFuture(test.toJson()));
+                        break;
+                    } else {
+                        continue;
+                    }
+                });
+             } else {
+                resultHandler.handle(Future.succeededFuture(test.toJson()));
+                break;
+             }
+        }
+     });
+ }
+});
+             </code></pre>
+        </section>
+        <section>
+             <pre class="stretch"><code  style="font-size: 60%;overflow: hidden;" contenteditable>
+ testsObservable.flatMap(Observable::from)
+    .map(json -> Test.fromJson(json, Test.class))
+    .flatMap(test -> environmentLocked(test).zipWith(isAllowedRunning(test), (a, b) -> !a && b)
+                 // environment is not locked (!a) and test is allowed running (b)
+        .first(canRun -> canRun)
+        .map(t -> test.toJson()))
+    .subscribe(RxHelper.toSubscriber(resultHandler));
+             </code></pre>
         </section>
 
         <!--What are observables?-->
