@@ -41,7 +41,7 @@
         </section>
         -->
         <section>
-            <h2>Everything is reactive</h2>
+            <h2>Everything is async</h2>
             <ul>
                 <li class="fragment">User clicks a button</li>
                 <li class="fragment">An external message is received</li>
@@ -49,7 +49,12 @@
                 <li class="fragment"><h3>Don't call us, we'll call you</h3></li>
             </ul>
             <aside class="notes">
-                If your application has any interaction with the outside world, you have a reactive source.
+                If your application has any interaction with the outside world, you have a reactive source. Think about network
+                latency or even errors. You don't want to block your application, waiting for an external reaction.
+
+                There are multiple ways of handling this. For instance by managing your threads.  Another aproach is to use a reactive
+                style of programming, by using callbacks. Lambda's in java have made this a little bit easier. However it still
+                often leads to something we call callback hell.
             </aside>
         </section>
 
@@ -79,6 +84,9 @@
  }
 });
              </code></pre>
+            <aside class="notes">
+                At least notice the amount of code which is written on this slide.
+            </aside>
         </section>
         <section>
              <pre class="stretch"><code  style="font-size: 60%;overflow: hidden;" contenteditable>
@@ -91,6 +99,11 @@
     .subscribe(RxHelper.toSubscriber(resultHandler));
              </code></pre>
         </section>
+        <aside class="notes">
+            At least notice the amount of code which is written on this slide. We make use of Reactive extentions.
+            RX is a set of tools, avaible for a wide range of languages, which helps us with reactive programming with a
+            powerful API.
+        </aside>
 
         <!--What are observables?-->
         <section>
