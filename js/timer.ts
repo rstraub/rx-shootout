@@ -1,8 +1,5 @@
 import { Observable } from "rxjs";
 
-document.getElementById('timerBtn').addEventListener('click', startTimer);
-document.getElementById('resetBtn').addEventListener('click', resetTimer);
-let valueNode = document.getElementById('values');
 
 let numbers = [1, 5, 10];
 
@@ -19,9 +16,12 @@ let source$ = Observable.create(observer => {
 
     produceValue();
 });
-    // .map(n => n * 2)
-    // .filter(n => n > 4);
 
+// Stuff to put the numbers in the html
+
+document.getElementById('timerBtn').addEventListener('click', startTimer);
+document.getElementById('resetBtn').addEventListener('click', resetTimer);
+let valueNode = document.getElementById('values');
 
 function startTimer() {
     source$.subscribe(
