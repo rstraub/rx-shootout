@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-public class HelloJavaFxAndMavenApp extends Application {
+public class MouseDemoApp extends Application {
 
 
 

@@ -13,6 +13,7 @@ public class TimerImproved {
         final int[] numbers = {1, 5, 10};
 
         Observable observable = Observable.interval(1000, TimeUnit.MILLISECONDS).take(numbers.length).map(t -> numbers[t.intValue()]);
+
         observable.subscribe(value -> System.out.println(value));
 
         Thread.sleep(1000000);
