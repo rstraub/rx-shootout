@@ -15,7 +15,8 @@ let source$ = Observable.create(observer => {
     };
 
     produceValue();
-});
+})
+.delay(10000);
 
 // Stuff to put the numbers in the html
 
